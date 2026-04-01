@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  --bg: #050505;
+  --ink: #FFFFFF;
+  --ink-muted: #A0A0A0;
+  --line: rgba(255, 255, 255, 0.1);
+  --neon-wine: #38040E;
+  --red-mate: #B91C1C;
+  --yellow-mate: #EAB308;
+  --green-mate: #15803D;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Geometric Utilities - Broken Grid */
+.poly-1 { clip-path: polygon(0% 0%, 100% 15%, 90% 100%, 10% 85%); }
+.poly-2 { clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%); }
+.poly-3 { clip-path: polygon(0% 15%, 85% 0%, 100% 100%, 15% 100%); }
+.poly-4 { clip-path: polygon(10% 0%, 90% 0%, 100% 85%, 0% 100%); }
+.poly-5 { clip-path: polygon(0% 0%, 85% 15%, 100% 100%, 0% 85%); }
+.poly-6 { clip-path: polygon(10% 10%, 100% 0%, 90% 90%, 0% 100%); }
+.poly-7 { clip-path: polygon(0% 0%, 90% 10%, 100% 100%, 10% 90%); }
+.trapezoid { clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%); }
+
+.border-neon-wine {
+  border: 1px solid var(--neon-wine);
+  box-shadow: 0 0 10px rgba(56, 4, 14, 0.4);
+}
+
+.text-glow-wine {
+  text-shadow: 0 0 8px var(--neon-wine);
+}
+
+/* Mate Signaling - NO GLOW */
+.tag-red {
+  background-color: var(--red-mate);
+  color: white;
+}
+
+.tag-yellow {
+  background-color: var(--yellow-mate);
+  color: black;
+}
+
+.tag-wine {
+  background-color: var(--neon-wine);
+  color: white;
+}
+
+.tag-green {
+  background-color: var(--green-mate);
+  color: white;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-wine);
+}
+
+/* Selection */
+::selection {
+  background: var(--neon-wine);
+  color: var(--bg);
+}
+
+/* Glitch Effect */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch-text::before {
+  color: var(--neon-magenta);
+  z-index: -1;
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  color: var(--neon-cyan);
+  z-index: -2;
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { transform: translate(0); }
+  25% { transform: translate(2px, -2px); }
+  50% { transform: translate(-2px, 2px); }
+  75% { transform: translate(2px, 2px); }
+  100% { transform: translate(0); }
+}
+
+/* Scanline Animation */
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(1000%); }
+}
+
+.animate-scan {
+  animation: scan 3s linear infinite;
+}
+
+/* Background Polygons */
+.bg-polygons {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.05;
+  pointer-events: none;
+}
