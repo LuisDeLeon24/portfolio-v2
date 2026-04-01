@@ -9,7 +9,7 @@ export interface Project {
     teamSize: string;
     result: string;
   };
-  image: string;
+  images: string[];
   link?: string;
   github?: string;
   featured?: boolean;

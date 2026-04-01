@@ -12,7 +12,7 @@
   --ink: #FFFFFF;
   --ink-muted: #A0A0A0;
   --line: rgba(255, 255, 255, 0.1);
-  --neon-wine: #38040E;
+  --neon-wine: #4B011D;
   --red-mate: #B91C1C;
   --yellow-mate: #EAB308;
   --green-mate: #15803D;
@@ -41,7 +41,7 @@ body {
 
 .border-neon-wine {
   border: 1px solid var(--neon-wine);
-  box-shadow: 0 0 10px rgba(56, 4, 14, 0.4);
+  box-shadow: 0 0 10px rgba(75, 1, 29, 0.4);
 }
 
 .text-glow-wine {

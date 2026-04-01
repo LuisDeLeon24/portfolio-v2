@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
-import { Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { Github, Linkedin, Mail, ArrowUpRight, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { TRANSLATIONS } from '../constants';
 import { cn } from '../lib/utils';
@@ -14,6 +14,7 @@ interface LayoutProps {
 export function Layout({ children, lang, setLang }: LayoutProps) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [systemLogs, setSystemLogs] = useState<string[]>(['INITIALIZING_CORE...', 'READY_TO_SHIP']);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const t = TRANSLATIONS[lang];
@@ -41,6 +42,24 @@ export function Layout({ children, lang, setLang }: LayoutProps) {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
+  const navLinks = location.pathname === '/' ? [
+    { href: "#about", label: t.nav.about },
+    { href: "#experience", label: t.nav.experience },
+    { href: "#projects", label: t.nav.projects },
+    { href: "#awards", label: t.nav.awards },
+    { href: "#education", label: t.nav.education },
+    { href: "#contact", label: t.nav.contact },
+  ] : [
+    { to: "/", label: "HOME" },
+    { to: "/projects", label: t.nav.projects },
+    { to: "/awards", label: t.nav.awards },
+  ];
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--ink)] selection:bg-[var(--neon-wine)] selection:text-[var(--bg)]">
@@ -80,7 +99,7 @@ export function Layout({ children, lang, setLang }: LayoutProps) {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full z-50 p-8 flex justify-between items-start pointer-events-none">
+      <nav className="fixed top-0 left-0 w-full z-50 p-4 md:p-8 flex justify-between items-start pointer-events-none">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,7 +111,7 @@ export function Layout({ children, lang, setLang }: LayoutProps) {
           </Link>
         </motion.div>
 
-        <div className="flex flex-col items-end gap-6 pointer-events-auto">
+        <div className="flex flex-col items-end gap-4 md:gap-6 pointer-events-auto">
           <div className="flex gap-3">
             <button 
               onClick={() => setLang(lang === 'en' ? 'es' : 'en')}
@@ -100,27 +119,64 @@ export function Layout({ children, lang, setLang }: LayoutProps) {
             >
               {lang === 'en' ? 'ES' : 'EN'}
             </button>
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden px-4 py-1 border border-white/10 bg-[var(--bg)]/50 backdrop-blur-md text-[9px] font-mono hover:border-[var(--neon-wine)] transition-all uppercase flex items-center gap-2"
+            >
+              {isMenuOpen ? <X className="w-3 h-3" /> : <Menu className="w-3 h-3" />}
+              {isMenuOpen ? 'CLOSE' : 'MENU'}
+            </button>
           </div>
-          <div className="flex flex-col gap-3 text-right font-mono text-[9px] tracking-[0.3em] opacity-40 uppercase">
-            {location.pathname === '/' ? (
-              <>
-                <a href="#about" className="hover:text-[var(--neon-wine)] transition-colors">{t.nav.about}</a>
-                <a href="#experience" className="hover:text-[var(--neon-wine)] transition-colors">{t.nav.experience}</a>
-                <a href="#projects" className="hover:text-[var(--neon-wine)] transition-colors">{t.nav.projects}</a>
-                <a href="#awards" className="hover:text-[var(--neon-wine)] transition-colors">{t.nav.awards}</a>
-                <a href="#education" className="hover:text-[var(--neon-wine)] transition-colors">{t.nav.education}</a>
-                <a href="#contact" className="hover:text-[var(--neon-wine)] transition-colors">{t.nav.contact}</a>
-              </>
-            ) : (
-              <>
-                <Link to="/" className="hover:text-[var(--neon-wine)] transition-colors">HOME</Link>
-                <Link to="/projects" className="hover:text-[var(--neon-wine)] transition-colors">{t.nav.projects}</Link>
-                <Link to="/awards" className="hover:text-[var(--neon-wine)] transition-colors">{t.nav.awards}</Link>
-              </>
-            )}
+
+          {/* Desktop Nav */}
+          <div className="hidden lg:flex flex-col gap-3 text-right font-mono text-[9px] tracking-[0.3em] opacity-40 uppercase">
+            {navLinks.map((link, i) => (
+              'href' in link ? (
+                <a key={i} href={link.href} className="hover:text-[var(--neon-wine)] transition-colors">{link.label}</a>
+              ) : (
+                <Link key={i} to={link.to} className="hover:text-[var(--neon-wine)] transition-colors">{link.label}</Link>
+              )
+            ))}
           </div>
         </div>
       </nav>
+
+      {/* Mobile Nav Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[45] bg-[var(--bg)] lg:hidden flex flex-col justify-center items-center p-8"
+          >
+            <div className="flex flex-col gap-8 text-center">
+              {navLinks.map((link, i) => (
+                'href' in link ? (
+                  <a 
+                    key={i} 
+                    href={link.href} 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-4xl font-black italic uppercase tracking-tighter hover:text-[var(--neon-wine)] transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link 
+                    key={i} 
+                    to={link.to} 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-4xl font-black italic uppercase tracking-tighter hover:text-[var(--neon-wine)] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <main>{children}</main>
 
