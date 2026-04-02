@@ -13,7 +13,7 @@ export default function AwardsPage({ lang }: AwardsPageProps) {
   const [currentFeaturedIndex, setCurrentFeaturedIndex] = useState(0);
   const t = TRANSLATIONS[lang];
 
-  const featuredAwards = ACHIEVEMENTS.filter(a => a.featured);
+  const featuredAwards = ACHIEVEMENTS.filter(a => a.featured).reverse();
   const allAwardsReversed = [...ACHIEVEMENTS].reverse();
 
   const nextFeatured = () => {

@@ -45,7 +45,7 @@ export function AchievementCard({ achievement, index }: AchievementCardProps) {
                 <img 
                   src={img} 
                   alt={`${achievement.title} - ${imgIdx}`}
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                  className="w-full h-full object-cover hover:grayscale-0 transition-all duration-500"
                   referrerPolicy="no-referrer"
                 />
               </motion.div>

@@ -16,7 +16,7 @@ export default function ProjectsPage({ lang }: ProjectsPageProps) {
   const [currentFeaturedIndex, setCurrentFeaturedIndex] = useState(0);
   const t = TRANSLATIONS[lang];
 
-  const featuredProjects = PROJECTS.filter(p => p.featured);
+  const featuredProjects = PROJECTS.filter(p => p.featured).reverse();
   const allProjectsReversed = [...PROJECTS].reverse();
 
   const nextFeatured = () => {

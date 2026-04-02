@@ -52,7 +52,7 @@ export function ProjectCard({ project, index, t, lang, onOpenCaseStudy }: Projec
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4 }}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              className="w-full h-full object-cover  scale-105  group-hover:scale-100 transition-all duration-700"
               referrerPolicy="no-referrer"
             />
           </AnimatePresence>
@@ -112,6 +112,7 @@ export function ProjectCard({ project, index, t, lang, onOpenCaseStudy }: Projec
           {project.tags.map(tag => {
             const isHackathon = tag.toUpperCase().includes('HACKATHON');
             const isAwarded = tag.toUpperCase().includes('AWARDED');
+            const isFreelance = tag.toUpperCase().includes('FREELANCE');
             return (
               <span 
                 key={tag} 
@@ -119,6 +120,7 @@ export function ProjectCard({ project, index, t, lang, onOpenCaseStudy }: Projec
                   "text-[10px] font-mono px-2 py-0.5 border",
                   isHackathon ? "tag-red border-transparent" : 
                   isAwarded ? "tag-yellow border-transparent" : 
+                  isFreelance ? "tag-green border-transparent" :
                   "text-[var(--neon-celeste)] border-[var(--neon-celeste)]/30"
                 )}
               >

@@ -35,6 +35,8 @@ export default function HomePage({ lang }: HomePageProps) {
   // Get 3 most recent (last 3 in array, reversed to show newest first)
   const recentProjects = PROJECTS.slice(-3).reverse();
   const recentAwards = ACHIEVEMENTS.slice(-3).reverse();
+  const recentExperience = EXPERIENCE.slice(-3).reverse();
+  const recentEducation = EDUCATION.slice(-3).reverse();
 
   return (
     <main>
@@ -107,14 +109,14 @@ export default function HomePage({ lang }: HomePageProps) {
               <div className="relative">
                 <div className="poly-2 border border-white/10 p-1 bg-white/5 relative z-10">
                   <img 
-                    src="https://picsum.photos/seed/luis/800/1000" 
+                    src="/Profile.png" 
                     alt="Luis De León" 
-                    className="w-full h-full object-cover grayscale contrast-125 brightness-90"
+                    className="w-full h-full object-cover contrast-125 brightness-90"
                     referrerPolicy="no-referrer"
                   />
                 </div>
                 <div className="absolute -bottom-4 md:-bottom-6 -right-4 md:-right-6 lg:-right-12 p-4 md:p-6 bg-white text-black font-mono font-bold text-[8px] md:text-[10px] uppercase tracking-[0.4em] rotate-2 z-20 shadow-2xl">
-                  BUILDER_ID: LUIS_DE_LEON
+                  Luis Eduardo De León Barrientos
                 </div>
                 {/* Decorative frame */}
                 <div className="absolute -top-6 md:-top-10 -left-6 md:-left-10 w-24 md:w-40 h-24 md:h-40 border-l border-t border-white/10 pointer-events-none" />
@@ -136,8 +138,8 @@ export default function HomePage({ lang }: HomePageProps) {
                 </div>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 border-t border-white/10 pt-12 md:pt-16">
-                  <Stat label="PROJECTS_SHIPPED" value="50+" color="white" />
-                  <Stat label="HACKATHONS_WON" value="12" color="var(--red-mate)" />
+                  <Stat label="PROJECTS_SHIPPED" value="10+" color="white" />
+                  <Stat label="HACKATHONS_WON" value="2" color="var(--red-mate)" />
                   <Stat label="UPTIME_PERCENT" value="99.9" color="var(--green-mate)" />
                 </div>
               </div>
@@ -159,7 +161,7 @@ export default function HomePage({ lang }: HomePageProps) {
           </h2>
 
           <div className="grid gap-8 md:gap-12">
-            {EXPERIENCE.map((exp, i) => (
+            {recentExperience.map((exp, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -320,7 +322,7 @@ export default function HomePage({ lang }: HomePageProps) {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            {EDUCATION.map((edu, i) => (
+            {recentEducation.map((edu, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -356,9 +358,9 @@ export default function HomePage({ lang }: HomePageProps) {
           <div className="grid lg:grid-cols-12 gap-16 md:gap-24 items-start">
             <div className="lg:col-span-5 space-y-8 md:space-y-12">
               <div className="space-y-6 md:space-y-8">
-                <ContactItem icon={<Mail />} label={t.contact.email} value="luis@deleon.tech" href="mailto:luis@deleon.tech" color="white" />
-                <ContactItem icon={<Github />} label={t.contact.github} value="github.com/luisdeleon" href="https://github.com" color="white" />
-                <ContactItem icon={<Linkedin />} label={t.contact.linkedin} value="linkedin.com/in/luisdeleon" href="https://linkedin.com" color="white" />
+                <ContactItem icon={<Mail />} label={t.contact.email} value="luis@deleon.tech" href="ldeleonb06@gmail.com" color="white" />
+                <ContactItem icon={<Github />} label={t.contact.github} value="github.com/luisdeleon" href="https://github.com/LuisDeLeon24" color="white" />
+                <ContactItem icon={<Linkedin />} label={t.contact.linkedin} value="linkedin.com/in/luisdeleon" href="https://www.linkedin.com/in/luis-de-le%C3%B3n" color="white" />
               </div>
               
               <div className="pt-8 md:pt-12 border-t border-white/10">
