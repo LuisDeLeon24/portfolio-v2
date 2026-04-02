@@ -48,7 +48,7 @@ export default function HomePage({ lang }: HomePageProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl sm:text-6xl md:text-[100px] lg:text-[140px] font-black tracking-tighter leading-[0.85] mb-8 md:mb-12 uppercase italic">
+            <h1 className="text-lg sm:text-3xl md:text-4xl lg:text-6xl font-black tracking-tighter leading-[0.85] mb-8 md:mb-12 uppercase italic">
               {t.hero.headline.split(' ').map((word, i) => (
                 <span key={i} className={cn(
                   "block",
