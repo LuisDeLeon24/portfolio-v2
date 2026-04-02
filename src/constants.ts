@@ -207,11 +207,11 @@ export const TRANSLATIONS: Record<'en' | 'es', Translation> = {
       content: 'I am Luis De León. I operate at the intersection of speed and stability. My workflow is optimized for high-pressure environments where execution is the only metric that matters.',
     },
     skills: {
-      title: 'TECHNICAL_STACK',
+      title: 'TECHNICAL STACK',
     },
     projects: {
-      title: 'PROJECT_SHOWCASE',
-      viewMore: 'VIEW_ALL_REPOS',
+      title: 'PROJECT SHOWCASE',
+      viewMore: 'VIEW ALL REPOS',
       seeMore: 'SEE ALL PROJECTS',
       problem: 'CONSTRAINT',
       solution: 'EXECUTION',
