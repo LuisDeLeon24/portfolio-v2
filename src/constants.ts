@@ -219,7 +219,7 @@ export const TRANSLATIONS: Record<'en' | 'es', Translation> = {
       details: 'DETAILS',
     },
     experience: {
-      title: 'WORK_EXPERIENCE',
+      title: 'WORK EXPERIENCE',
     },
     awards: {
       title: 'AWARDS',
